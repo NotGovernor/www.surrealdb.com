@@ -1,7 +1,5 @@
-DEFINE FIELD resource on acl TYPE record 
-  ASSERT $value != NONE;
-DEFINE FIELD user ON TABLE acl TYPE record (user)
-  ASSERT $value != NONE;
+DEFINE FIELD resource ON acl TYPE record;
+DEFINE FIELD user ON TABLE acl TYPE record<user>;
 
 -- A user can have multiple permissions on a acl
 DEFINE FIELD permission ON TABLE acl TYPE array
