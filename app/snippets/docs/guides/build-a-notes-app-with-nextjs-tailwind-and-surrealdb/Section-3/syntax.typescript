@@ -1,0 +1,1 @@
+async db.create<T>(thing, data)
