@@ -1,0 +1,1 @@
+ async db.merge<T>(thing, data)

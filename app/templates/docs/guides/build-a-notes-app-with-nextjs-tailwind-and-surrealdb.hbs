@@ -19,10 +19,10 @@
 <p>With Surreal Stickies, you can add, update and delete notes at your convenience. You can create two types of stickies — a purple one and a pink one. </p>
 <p>This is how our notes app will look once we build it. </p>
 
-<img src="https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/cid8k44j8ems73a5340g.jpg" width="1000" height="600"  border-radius = "3px" alt="Untitled"/>
+<img src="	https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/cid8k44j8ems73a5340g.auto" width="1000" height="600"  border-radius = "3px" alt="Untitled"/>
 
 <Layout::Gap small />
-
+ 
 <h2 id="architecture">Architecture</h2>
 
 <img src="https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/ciaac0gut8gs73b6e3n0.jpg"  width="1000" height="600"alt="architecture.png"/>
@@ -36,29 +36,37 @@
 <li>A basic understanding of Next.js and Tailwind</li>
 <li>One of the following package managers: <a href="https://nodejs.org/en/download">npm</a>, <a href="https://pnpm.io/installation">pnpm</a> or <a href="https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable">yarn</a></li>
 </ul>
+
 <h2 id="step-1-install-the-surrealdb-library">Step 1: Install the SurrealDB library</h2>
 <p>The <a href="https://surrealdb.com/docs/integration/libraries/javascript">SurrealDB</a> driver for JavaScript enables simple and advanced querying of a remote database from a browser or from server-side code. All connections to SurrealDB are made over WebSockets, and automatically reconnect when the connection is terminated.</p>
 <p>Install the SurrealDB library using <code>npm</code>:</p>
-<pre><code>npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save surrealdb.js</span>
-</code></pre><p>Alternatively, you can use install the SurrealDB library using <code>yarn</code> :</p>
-<pre><code>yarn <span class="hljs-keyword">add</span><span class="bash"> surrealdb.js</span>
-</code></pre><p>Or <code>pnpm</code>: </p>
-<pre><code class="lang-jsx">pnpm <span class="hljs-keyword">install</span> surrealdb.js
-</code></pre>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ec5b36bb-734b-43b5-b9f6-c41833dce77a/installation_(1" alt="installation (1).png">.png)</p>
+
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/install-surreal.sh" text="Command"/>
+
+<p>Alternatively, you can use install the SurrealDB library using <code>yarn</code> :</p>
+
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/yarn.sh" text="Command"/>
+<p>Or <code>pnpm</code>: </p>
+
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/pnpm.sh" text="Command"/>
+
+<img src="https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/ciaac0gut8gs73b6e3ng.auto" width="100%" alt="installation"/>
 <p>🎉 Congratulations on completing the installation! 🎉</p>
 <p>Let’s proceed to Step 2: Set up your Next.js project!</p>
 <h2 id="step-2-set-up-your-next-js-project-">Step 2: Set up your Next.js project.</h2>
 <ol>
 <li>Open your terminal and run the following command to create a new Next.js application:</li>
 </ol>
-<pre><code class="lang-bash"><span class="hljs-string">pnpx </span><span class="hljs-built_in">create-next-app@latest</span> <span class="hljs-string">surrealdb-stickies</span>
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/create-next.sh" text="Command"/>
+
 <p>It will also install all the necessary dependencies that are needed for a Next.js application. </p>
 <p>Here’s a snapshot of how your project setup will look like:</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/13d48e66-83e8-4ca7-a252-2db1ce3126e0/projectsetup_(1" alt="projectsetup (1).png">.png)</p>
+<img src="	https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/ciaac0gut8gs73b6e3o0.auto" width="100%" alt="installation"/>
+<Layout::Gap small />
+
 <p>For the complete setup, copy the package.json from the GitHub <a href="https://github.com/timpratim/surrealstickies/blob/122100e9b0bd58ee28fc3d859351673f22391827/package.json">repo</a> of this application and paste it into your package.json</p>
 <p>This sets up the scripts you&#39;ll use to develop, build, and run your application. It also includes scripts for TypeScript and ESLint for linting.</p>
+
 <ul>
 <li><strong><code>dev</code></strong>: This is the main development command that runs the SurrealDB server and the Next.js development server concurrently.</li>
 <li><strong><code>dev:surreal</code></strong>: This starts the SurrealDB server.</li>
@@ -68,8 +76,10 @@
 <li><strong><code>ts</code></strong>: This runs TypeScript in watch mode.</li>
 <li><strong><code>lint</code></strong>: This uses ESLint to analyse your code for errors</li>
 </ul>
+
 <p>🎉 Congratulations on Setting up your Next.js Project! 🎉</p>
 <p>Let’s proceed to Step 3: Building the CRUD APIs!</p>
+
 <h2 id="step-3-building-the-crud-apis">Step 3: Building the CRUD APIs</h2>
 <p>Surreal Stickies can create, view, update and delete notes. Each of these functionalities essentially leverages the CRUD operations (Create, Read, Update, and Delete) provided by SurrealDB.</p>
 <p>For the sake of modularity and clear separation, we will create two <code>route.ts</code> files which will include the code for our CRUD methods. One will be in the our <code>sticky</code> directory and the other will be inside our our <code>id</code> directory which will mimic our API path
@@ -81,11 +91,12 @@ You can directly navigate to the <code><a href="https://github.com/surrealdb/exa
 <li><strong>Creating a New Sticky Note</strong>
 When a user clicks on the purple <code>+</code> button, Surreal Stickies calls the <code>POST</code> method with the required details. The API route will then create a new record in SurrealDB by using the <code>surreal.create()</code> method from the <em>surrealdb.js</em> library.</li>
 </ul>
+
 <p><strong>Syntax:</strong></p>
 
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/Section-3/syntax.typescript" text="Syntax"/>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/syntax.typescript" text="Syntax"/>
 
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/Section-3/create.ts" text="TS"/>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/create.ts" text="TS"/>
 <p>A query similar to query below will be executed in your database: </p>
 <pre><code class="lang-jsx"><span class="hljs-keyword">CREATE</span> sticky <span class="hljs-keyword">CONTENT</span> {
     color: <span class="hljs-string">'purple'</span>,
@@ -95,88 +106,39 @@ When a user clicks on the purple <code>+</code> button, Surreal Stickies calls t
 };
 </code></pre>
 <p>In our example, we create an empty sticky by default and populate it’s content with the <code>UPDATE</code> method. This prevents rendering issues on the frontend.</p>
+
 <ul>
 <li><p><strong>Updating a Sticky Note</strong></p>
 <p>  When the user wishes to edit a sticky note, Surreal Stickies uses the <code>PATCH</code> API route. The <strong><code>surreal.merge</code></strong> function enables the application to merge new data with existing records in SurrealDB.</p>
 <p>  <strong>Syntax</strong></p>
-<pre><code class="lang-jsx">  async db.<span class="hljs-built_in">merge</span>&lt;T&gt;(thing, <span class="hljs-keyword">data</span>)
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/update.typescript" text="Syntax"/>
 <p>  Modifies all records in a table, or a specific record, in the database.</p>
 <p>  In our stickies app, once the ID and the sticky are validated by the <code>validateId</code> and <code>validateSticky</code> functions, we merge only the new changes in our note.</p>
-<pre><code class="lang-jsx">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">PATCH</span>(<span class="hljs-params">
-      request: Request,
-      { params }: { params: { id: string } }
-  </span>) </span>{
-      <span class="hljs-keyword">const</span> { id, ...validation } = validateId(params.id);
-      <span class="hljs-keyword">if</span> (validation.error) <span class="hljs-keyword">return</span> validation.error;
 
-      <span class="hljs-keyword">const</span> sticky = (<span class="hljs-keyword">await</span> request.json()) <span class="hljs-keyword">as</span> Partial&lt;
-          Pick&lt;Sticky, <span class="hljs-string">'color'</span> | <span class="hljs-string">'content'</span>&gt;
-      &gt;;
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/update.ts" text="TS"/>
 
-      <span class="hljs-keyword">const</span> error = validateSticky(sticky);
-      <span class="hljs-keyword">if</span> (error) <span class="hljs-keyword">return</span> error;
-
-      <span class="hljs-keyword">const</span> update: Partial&lt;Sticky&gt; = { <span class="hljs-attr">updated</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>() };
-      <span class="hljs-keyword">if</span> (sticky.color) update.color = sticky.color;
-      <span class="hljs-keyword">if</span> (sticky.content) update.content = sticky.content;
-
-      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> surreal.merge(<span class="hljs-string">`sticky:<span class="hljs-subst">${id}</span>`</span>, update);
-      <span class="hljs-keyword">return</span> NextResponse.json({
-          <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
-          <span class="hljs-attr">sticky</span>: result[<span class="hljs-number">0</span>],
-      });
-  }
-</code></pre>
 <p>  A query similar to query below will be executed in your database:</p>
-<pre><code class="lang-sql">  <span class="hljs-selector-tag">UPDATE</span> <span class="hljs-selector-tag">sticky</span><span class="hljs-selector-pseudo">:tq5uwwob82bgm5qq60gz</span> <span class="hljs-selector-tag">MERGE</span> {
-      <span class="hljs-attribute">color</span>: <span class="hljs-string">'purple'</span>,
-      content: <span class="hljs-string">'SurrealDB is a multi-model database'</span>,
-      updated: <span class="hljs-string">'2023-06-19T15:17:15.442Z'</span>
-  };
-</code></pre>
+
 </li>
 </ul>
+
 <ul>
 <li><p><strong>Retrieving All Sticky Notes</strong></p>
 <p>  When the user opens the application or hits a &quot;refresh&quot; button, the application needs to display all the sticky notes. To do this, the application calls the GET method which retrieves all sticky notes from the backend. This method is also called when a new note is added or an existing note is deleted or updated, and the UI needs to reflect these changes by fetching the updated list of all sticky notes.</p>
-<pre><code class="lang-jsx">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">GET</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-comment">// Custom select query for ordering</span>
-      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> surreal.query(
-          <span class="hljs-string">'SELECT * FROM sticky ORDER BY updated DESC'</span>
-      );
-      <span class="hljs-keyword">return</span> NextResponse.json({
-          <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
-          <span class="hljs-attr">stickies</span>: result?.[<span class="hljs-number">0</span>]?.result ?? [],
-      });
-  }
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/retrieveall.ts" text="TS"/>
 <p>  The following query will be executed in your database whenever you load the page, create/update/delete a sticky or when you refocus the window.</p>
 <pre><code class="lang-sql">  <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> sticky <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">updated</span> <span class="hljs-keyword">DESC</span>
 </code></pre>
 </li>
 </ul>
+
 <ul>
 <li><p><strong>Deleting a Sticky Note</strong></p>
 <p>  When the user clicks on the <code>X</code> button, the <code>DELETE</code> method is called.
   <strong>Syntax:</strong></p>
-<pre><code class="lang-jsx">  async db.<span class="hljs-keyword">delete</span><span class="hljs-symbol">&lt;T&gt;</span>(thing)
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/delete.typescript" text="Syntax"/>
 <p>   It validates the <strong><code>id</code></strong> from the request parameters and subsequently uses <strong><code>surreal.delete</code></strong> to erase the corresponding record from SurrealDB.</p>
-<pre><code class="lang-jsx">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DELETE</span>(<span class="hljs-params">
-      request: Request,
-      { params }: { params: { id: string } }
-  </span>) </span>{
-      <span class="hljs-keyword">const</span> { id, ...validation } = validateId(params.id);
-      <span class="hljs-keyword">if</span> (validation.error) <span class="hljs-keyword">return</span> validation.error;
-
-      <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> surreal.delete(<span class="hljs-string">`sticky:<span class="hljs-subst">${id}</span>`</span>);
-      <span class="hljs-keyword">return</span> NextResponse.json({
-          <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>,
-          <span class="hljs-attr">sticky</span>: result[<span class="hljs-number">0</span>],
-      });
-  }
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/delete.ts" text="TS"/>
 <p>  The following query will be executed in your database when you click on the <code>X</code> button:</p>
 <pre><code class="lang-jsx">  <span class="hljs-keyword">DELETE</span> * <span class="hljs-keyword">FROM</span> sticky:gp4u59t5wlo0vre5d96j;
 </code></pre>
@@ -190,109 +152,24 @@ When a user clicks on the purple <code>+</code> button, Surreal Stickies calls t
 <p>Now that we are ready with our backend, let&#39;s build the frontend or user interface for our application.  </p>
 <ol>
 <li><p><strong>Set up the base layout for our application:</strong> The first thing we&#39;ll do is set up our base layout for our application using Next.js and Tailwind CSS. In the file <strong><code>src/app/layout.tsx</code></strong>, we establish the root layout of our application which includes a navbar, the main content of our page, and a footer.</p>
-<pre><code class="lang-jsx"> <span class="hljs-keyword">import</span> { Footer } <span class="hljs-keyword">from</span> <span class="hljs-string">'@/components/footer'</span>;
- <span class="hljs-keyword">import</span> { Navbar } <span class="hljs-keyword">from</span> <span class="hljs-string">'@/components/navbar'</span>;
- <span class="hljs-keyword">import</span> { cn } <span class="hljs-keyword">from</span> <span class="hljs-string">'@/lib/utils'</span>;
- <span class="hljs-keyword">import</span> { Poppins } <span class="hljs-keyword">from</span> <span class="hljs-string">'next/font/google'</span>;
- <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
- <span class="hljs-keyword">import</span> <span class="hljs-string">'./globals.css'</span>;
-
- <span class="hljs-comment">// ...</span>
-
- <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">RootLayout</span>(<span class="hljs-params">{
-     children,
- }: {
-     children: React.ReactNode;
- }</span>) </span>{
-     <span class="hljs-keyword">return</span> (
-         <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
-             <span class="hljs-tag">&lt;<span class="hljs-name">body</span>
-                 <span class="hljs-attr">className</span>=<span class="hljs-string">{cn(</span>
-                     '<span class="hljs-attr">flex</span> <span class="hljs-attr">h-screen</span> <span class="hljs-attr">flex-col</span> <span class="hljs-attr">bg-dots</span>',
-                     <span class="hljs-attr">poppins.className</span>
-                 )}
-             &gt;</span>
-                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"mx-auto flex w-full max-w-screen-xl flex-grow flex-col px-8 sm:px-24"</span>&gt;</span>
-                     <span class="hljs-tag">&lt;<span class="hljs-name">Navbar</span> /&gt;</span>
-                     {/* We use the content of the page to grow so that the footer is always down the bottom */}
-                     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"flex-grow"</span>&gt;</span>{children}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-                     <span class="hljs-tag">&lt;<span class="hljs-name">Footer</span> /&gt;</span>
-                 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-             <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-         <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span>
-     );
- }
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/layout.ts" text="TS"/>
 <p> This <strong><code>div</code></strong> element <code>&lt;div className=&quot;mx-auto flex w-full max-w-screen-xl flex-grow flex-col px-8 sm:px-24&quot;&gt;</code> is applying multiple CSS classes provided by Tailwind CSS to control the layout and styling of its content and make our application responsive &amp; mobile friendly. </p>
 </li>
 </ol>
-<ol>
+<ol> 
 <li><p><strong>Creating API Calls:</strong> After setting up our layout, we need to create API calling functions that will interact with our backend. These functions are created in the <strong><code>src/lib/modifiers.ts</code></strong> file and include methods to fetch, create, update, and delete stickies.</p>
 <p> Here&#39;s the code snippet for <strong><code>createSticky</code></strong> function:</p>
-<pre><code class="lang-jsx"> <span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createSticky</span>(<span class="hljs-params">
-     payload: Pick&lt;Sticky, <span class="hljs-string">'color'</span> | <span class="hljs-string">'content'</span>&gt;
- </span>): <span class="hljs-title">Promise</span>&lt;</span>{
-     success: boolean;
-     sticky?: Sticky;
- }&gt; {
-     <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> (
-         <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">'/api/sticky'</span>, {
-             <span class="hljs-attr">method</span>: <span class="hljs-string">'post'</span>,
-             <span class="hljs-attr">headers</span>: {
-                 <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>,
-             },
-             <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify(payload),
-         })
-     ).json();
- }
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/create-sticky.ts" text="TS"/>
 </li>
+
 <li><p><strong>Creating Hooks:</strong>  After defining our API calling functions, we need to create hooks that will use these functions and manage the state in our components. These hooks are created in the <strong><code>src/lib/hooks.ts</code></strong> file. Here&#39;s an example with the <strong><code>useCreateSticky</code></strong> hook:</p>
-<pre><code class="lang-jsx"> <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> useCreateSticky = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span>
-     useSWRMutation(
-         <span class="hljs-string">`/api/sticky`</span>,
-                 <span class="hljs-comment">// The typing looks more complex than it is</span>
-                 <span class="hljs-comment">// We essentially grab the types of the first argument </span>
-                 <span class="hljs-comment">// of the createSticky function so we can pass it on</span>
-         (_, { arg }: { <span class="hljs-attr">arg</span>: Parameters&lt;<span class="hljs-keyword">typeof</span> createSticky&gt;[<span class="hljs-number">0</span>] }) =&gt;
-             createSticky(arg)
-     );
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/use-create-sticky.ts" text="TS"/>
 <p> These hooks use the <strong><code>useSWR</code></strong> and <strong><code>useSWRMutation</code></strong> hooks from the SWR library for data fetching and mutation. SWR provides a lot of useful features like caching, automatic revalidation, and error retries, which make it easier to manage the server state in a React application.</p>
 <p> In this application we give every SWR hook the same unique key. This will cause the list of stickies to automatically refresh once we use the create, update or delete hooks. </p>
 </li>
+
 <li><p><strong>Creating the Home Component:</strong> Now, we&#39;re ready to build our <strong><code>Home</code></strong> component which is the main page of our application. In this component, we use the hooks we’ve just defined previously to fetch, create, and render stickies. We also handle user interactions like creating a new sticky or displaying an error message.</p>
-<pre><code class="lang-jsx"><span class="xml"> export default function Home() </span><span class="hljs-template-variable">{
-     const { data, error, isLoading }</span><span class="xml"> = useStickies();
-     const </span><span class="hljs-template-variable">{ createColor, setCreateColor }</span><span class="xml"> = useCreateStickyStore((s) =&gt; s);
-     const </span><span class="hljs-template-variable">{ trigger: createSticky }</span><span class="xml"> = useCreateSticky();
-
-     // ...
-
-     return isLoading ? (
-         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"flex h-full w-full items-center justify-center"</span>&gt;</span>
-             <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"flex items-center gap-4 text-2xl"</span>&gt;</span>
-                 <span class="hljs-tag">&lt;<span class="hljs-name">Loader2</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"animate-spin"</span> /&gt;</span>
-                 Loading stickies
-             <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-     ) : (
-         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"grid w-full grid-cols-1 gap-6 sm:py-16 md:grid-cols-2 xl:grid-cols-3"</span>&gt;</span>
-             </span><span class="hljs-template-variable">{createColor &amp;&amp; (
-                 &lt;StickyFramework
-                     color={createColor}</span><span class="xml">
-                     onClose=</span><span class="hljs-template-variable">{submit}</span><span class="xml">
-                     onDelete=</span><span class="hljs-template-variable">{() =&gt; setCreateColor(null)}</span><span class="xml">
-                     editing=</span><span class="hljs-template-variable">{true}</span><span class="xml">
-                 /&gt;
-             )}
-             </span><span class="hljs-template-variable">{data?.stickies.map(({ id, content, color }</span><span class="xml">) =&gt; (
-                 <span class="hljs-tag">&lt;<span class="hljs-name">Sticky</span> <span class="hljs-attr">key</span>=</span></span><span class="hljs-template-variable">{id}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">id</span>=</span></span><span class="hljs-template-variable">{id}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">color</span>=</span></span><span class="hljs-template-variable">{color}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">content</span>=</span></span><span class="hljs-template-variable">{content}</span><span class="xml"><span class="hljs-tag"> /&gt;</span>
-             ))}
-         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-     );
- }</span>
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/home.ts" text="TS"/>
 <p> Once you have all the components built, you can run the application on localhost. </p>
 <p> The following command will start your SurrealDB server and build your application concurrently. </p>
 <pre><code class="lang-jsx"><span class="hljs-attribute"> pnpm dev</span>
@@ -306,9 +183,12 @@ When a user clicks on the purple <code>+</code> button, Surreal Stickies calls t
 <p> On the front end, we used Next.js to create our app and its parts. We managed the app&#39;s state and its interactions with the APIs using hooks for different tasks, like retrieving the sticky notes, adding new ones, updating them, and deleting them.</p>
 <p> Finally, we used Tailwind CSS to design our app, making it easy and enjoyable for users to use. With all these parts working together, our app successfully lets users make, see, edit, and delete sticky notes.</p>
 <h2 id="conclusion">Conclusion</h2>
+<img src = "https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/cid91h4j8ems73a53480.auto
+" width="100%" alt="Surreal Stickies" />
 <p> The Notes App showed us a very simple and straightforward implementation of SurrealDB. SurrealDB is a powerful database capable of replacing the complete backend with inbuilt features like multi-tenancy, indexing, live queries, custom functions and many more. </p>
 <p> In this tutorial we only touched on a fraction of what makes SurrealD the ultimate multi-model database. To find out more see you can check out the <a href="https://surrealdb.com/features">SurrealDB features</a> or our <a href="https://github.com/surrealdb/surrealdb">GitHub repo</a>.</p>
 </li>
+
 </ol>
 
 </Layout::Text>

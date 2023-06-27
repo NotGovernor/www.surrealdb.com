@@ -1,0 +1,1 @@
+pnpx create-next-app@latest surrealdb-stickies
