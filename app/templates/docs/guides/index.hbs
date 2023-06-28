@@ -5,25 +5,27 @@
 
 <Layout::Text text-l text-f>
     <h2>Guides</h2>
-	<p>We are working on guides for the topics you see here below, if you'd like more topics added, let us know on <a href="https://discord.gg/surrealdb">discord</a></p>
+	<p>Welcome to our Guides section! Here, you'll find comprehensive resources to master our product/service. Our user-friendly guides cover everything from setup to troubleshooting, providing clear explanations and practical examples. Unlock the full potential of our offering and embark on an empowering learning journey. Let's get started!</p>
+	<p> if you'd like more topics added, let us know on <a href="https://discord.gg/surrealdb">discord</a></p>
 </Layout::Text>
 
 <Layout::Gap mini />
 
 <Layout::Boxes cols-3-to-2-to-1>
-	<LinkTo @route="docs.guides.strict-mode">
-		<Layout::Boxes::Item mini hover>
-			<h4>Running in strict mode</h4>
-			<p>Coming soon</p>
-		</Layout::Boxes::Item>
-	</LinkTo>
 
 	<LinkTo @route="docs.guides.build-a-notes-app-with-nextjs-tailwind-and-surrealdb">
 		<Layout::Boxes::Item mini hover>
 			<h4>Build a Notes App with Next.js, Tailwind and SurrealDB</h4>
-			<p>Coming soon</p>
+			<p>In this guide, you'll learn how to implement a sample full-stack notes taking application called Surreal Stickies using: SurrealDB, Next.js,SWR, Tailwind CSS, and TypeScript.</p>
 		</Layout::Boxes::Item>
 	</LinkTo>
+
+	{{!-- <LinkTo @route="docs.guides.strict-mode">
+		<Layout::Boxes::Item mini hover>
+			<h4>Running in strict mode</h4>
+			<p>Coming soon</p>
+		</Layout::Boxes::Item>
+	</LinkTo> --}}
 
 	{{!-- <LinkTo @route="docs.guides.schemafull-or-schemaless">
 		<Layout::Boxes::Item mini hover>

@@ -81,15 +81,15 @@ Router.map(function () {
 		});
 
 		this.route('guides', function () {
-			this.route('schemafull-or-schemaless');
-			this.route('relations-and-graph');
-			this.route('realtime-subscriptions');
-			this.route('geospatial-functionality');
-			this.route('data-triggers');
-			this.route('computed-views');
-			this.route('authenticating-users');
-			this.route('deploying-surrealdb');
-			this.route('strict-mode');
+			// this.route('schemafull-or-schemaless');
+			// this.route('relations-and-graph');
+			// this.route('realtime-subscriptions');
+			// this.route('geospatial-functionality');
+			// this.route('data-triggers');
+			// this.route('computed-views');
+			// this.route('authenticating-users');
+			// this.route('deploying-surrealdb');
+			// this.route('strict-mode');
 			this.route('build-a-notes-app-with-nextjs-tailwind-and-surrealdb');
 		});
 

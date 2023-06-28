@@ -1,7 +1,7 @@
 <Crumb>
 	<Crumb::Item @link="docs">Documentation</Crumb::Item>
 	<Crumb::Item @link="docs.guides">Guides</Crumb::Item>
-	<Crumb::Item @link="docs.guides.strict-mode">Strict mode</Crumb::Item>
+	<Crumb::Item @link="docs.guides.build-a-notes-app-with-nextjs-tailwind-and-surrealdb">Build a Notes App with Next.js, Tailwind and SurrealDB</Crumb::Item>
 </Crumb>
 
 
@@ -27,6 +27,8 @@
 
 <img src="https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/ciaac0gut8gs73b6e3n0.jpg"  width="1000" height="600"alt="architecture.png"/>
 
+<Layout::Gap small />
+
 <h2 id="-prerequisites-">Prerequisites</h2>
 
 <p>Before you begin this tutorial you&#39;ll need the following:</p>
@@ -41,14 +43,14 @@
 <p>The <a href="https://surrealdb.com/docs/integration/libraries/javascript">SurrealDB</a> driver for JavaScript enables simple and advanced querying of a remote database from a browser or from server-side code. All connections to SurrealDB are made over WebSockets, and automatically reconnect when the connection is terminated.</p>
 <p>Install the SurrealDB library using <code>npm</code>:</p>
 
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/install-surreal.sh" text="Command"/>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/install-surreal.shell" text="Command"/>
 
 <p>Alternatively, you can use install the SurrealDB library using <code>yarn</code> :</p>
 
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/yarn.sh" text="Command"/>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/yarn.shell" text="Command"/>
 <p>Or <code>pnpm</code>: </p>
 
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/pnpm.sh" text="Command"/>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/pnpm.shell" text="Command"/>
 
 <img src="https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/ciaac0gut8gs73b6e3ng.auto" width="100%" alt="installation"/>
 <p>🎉 Congratulations on completing the installation! 🎉</p>
@@ -57,7 +59,7 @@
 <ol>
 <li>Open your terminal and run the following command to create a new Next.js application:</li>
 </ol>
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/create-next.sh" text="Command"/>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/create-next.shell" text="Command"/>
 
 <p>It will also install all the necessary dependencies that are needed for a Next.js application. </p>
 <p>Here’s a snapshot of how your project setup will look like:</p>
@@ -98,13 +100,7 @@ When a user clicks on the purple <code>+</code> button, Surreal Stickies calls t
 
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/create.ts" text="TS"/>
 <p>A query similar to query below will be executed in your database: </p>
-<pre><code class="lang-jsx"><span class="hljs-keyword">CREATE</span> sticky <span class="hljs-keyword">CONTENT</span> {
-    color: <span class="hljs-string">'purple'</span>,
-    <span class="hljs-keyword">content</span>: <span class="hljs-string">''</span>,
-    created: <span class="hljs-string">'2023-06-19T15:37:10.106Z'</span>,
-    <span class="hljs-keyword">updated</span>: <span class="hljs-string">'2023-06-19T15:37:10.106Z'</span>
-};
-</code></pre>
+<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/create.surql" text="Surql"/>
 <p>In our example, we create an empty sticky by default and populate it’s content with the <code>UPDATE</code> method. This prevents rendering issues on the frontend.</p>
 
 <ul>
