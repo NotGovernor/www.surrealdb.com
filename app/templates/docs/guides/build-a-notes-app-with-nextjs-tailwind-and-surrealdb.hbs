@@ -16,12 +16,13 @@
 <li><a href="https://tailwindcss.com/docs/installation">Tailwind</a>: for styling our application</li>
 </ul>
 
-<p>With Surreal Stickies, you can add, update and delete notes at your convenience. You can create two types of stickies — a purple one and a pink one. <p>This is how our notes app will look once we build it. </p> </p>
+<p>With Surreal Stickies, you can add, update and delete notes at your convenience. You can create two types of stickies — a purple one and a pink one. </p>
+<p>This is how our notes app will look once we build it. </p>
 
 <img src="	https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/cid8k44j8ems73a5340g.auto" width="100%" height="unset"  border-radius = "3px" alt="Untitled"/>
 
 <Layout::Gap tiny />
- 
+
 <h2 id="architecture">Architecture</h2>
 
 <img src="https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/ciaac0gut8gs73b6e3n0.jpg"  width="100%" height="unset"alt="architecture.png"/>
@@ -31,7 +32,6 @@
 <h2 id="-prerequisites-">Prerequisites</h2>
 
 <p>Before you begin this tutorial you&#39;ll need the following:</p>
-
 <ul>
 <li><a href="https://surrealdb.com/install">SurrealDB</a> installed on your machine. ( Make sure you upgrade to the latest version if you already have SurrealDB installed on your machine)</li>
 <li><a href="https://nodejs.org/en/download">Node.js</a> installed locally on your computer</li>
@@ -53,11 +53,8 @@
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/shell-commands/pnpm.shell" text="Command"/>
 
 <img src="https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/ciaac0gut8gs73b6e3ng.auto" width="100%" alt="installation"/>
-
-<Layout::Gap tiny />
-<p>🎉 Congratulations on completing the installation! 🎉 . Let’s proceed to Step 2: Set up your Next.js project!</p>
-
-<br/>
+<p>🎉 Congratulations on completing the installation! 🎉</p>
+<p>Let’s proceed to Step 2: Set up your Next.js project!</p>
 <h2 id="step-2-set-up-your-next-js-project-">Step 2: Set up your Next.js project.</h2>
 <ol>
 <li>Open your terminal and run the following command to create a new Next.js application:</li>
@@ -92,9 +89,11 @@
 You can directly navigate to the <code><a href="https://github.com/surrealdb/examples/blob/main/notes-app/src/app/api/sticky/route.ts">route.ts</a></code> file from the repo in order to refer to the <code>GET</code> and <code>POST</code> methods which do not need the <code>id</code> of the stickies. The other <code><a href="https://github.com/surrealdb/examples/blob/main/notes-app/src/app/api/sticky/%5Bid%5D/route.ts">route.ts</a></code> file can be found here. </p>
 <p>Let’s get to work now 🛠</p>
 
-<h4>Creating a New Sticky Note</h4>
 
-<p>When a user clicks on the purple <code>+</code> button, Surreal Stickies calls the <code>POST</code> method with the required details. The API route will then create a new record in SurrealDB by using the <code>surreal.create()</code> method from the <em>surrealdb.js</em> library.</p>
+<ul>
+<li><strong>Creating a New Sticky Note</strong>
+When a user clicks on the purple <code>+</code> button, Surreal Stickies calls the <code>POST</code> method with the required details. The API route will then create a new record in SurrealDB by using the <code>surreal.create()</code> method from the <em>surrealdb.js</em> library.</li>
+</ul>
 
 <p><strong>Syntax:</strong></p>
 
@@ -105,10 +104,10 @@ You can directly navigate to the <code><a href="https://github.com/surrealdb/exa
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/create.surql" text="Surql"/>
 <p>In our example, we create an empty sticky by default and populate it’s content with the <code>UPDATE</code> method. This prevents rendering issues on the frontend.</p>
 
-<h4>Updating a Sticky Note</h4>
-<p> When the user wishes to edit a sticky note, Surreal Stickies uses the <code>PATCH</code> API route. The <strong><code>surreal.merge</code></strong> function enables the application to merge new data with existing records in SurrealDB.</p>
-
-<p>  <strong>Syntax:</strong></p>
+<ul>
+<li><p><strong>Updating a Sticky Note</strong></p>
+<p>  When the user wishes to edit a sticky note, Surreal Stickies uses the <code>PATCH</code> API route. The <strong><code>surreal.merge</code></strong> function enables the application to merge new data with existing records in SurrealDB.</p>
+<p>  <strong>Syntax</strong></p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/update.typescript" text="Syntax"/>
 <p>  Modifies all records in a table, or a specific record, in the database.</p>
 <p>  In our stickies app, once the ID and the sticky are validated by the <code>validateId</code> and <code>validateSticky</code> functions, we merge only the new changes in our note.</p>
@@ -117,53 +116,56 @@ You can directly navigate to the <code><a href="https://github.com/surrealdb/exa
 
 <p>  A query similar to query below will be executed in your database:</p>
 
-<h4>Retrieving All Sticky Notes </h4>
+</li>
+</ul>
+
+<ul>
+<li><p><strong>Retrieving All Sticky Notes</strong></p>
 <p>  When the user opens the application or hits a &quot;refresh&quot; button, the application needs to display all the sticky notes. To do this, the application calls the GET method which retrieves all sticky notes from the backend. This method is also called when a new note is added or an existing note is deleted or updated, and the UI needs to reflect these changes by fetching the updated list of all sticky notes.</p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/retrieveall.ts" text="TS"/>
 <p>  The following query will be executed in your database whenever you load the page, create/update/delete a sticky or when you refocus the window.</p>
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/retrieveall.surql" text="Surql"/>
+<pre><code class="lang-sql">  <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> sticky <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">updated</span> <span class="hljs-keyword">DESC</span>
+</code></pre>
+</li>
+</ul>
 
-<h4>Deleting a Sticky Note</h4>
-
-<p>  When the user clicks on the <code>X</code> button, the <code>DELETE</code> method is called.</p>
-
-<p><strong>Syntax:</strong></p>
+<ul>
+<li><p><strong>Deleting a Sticky Note</strong></p>
+<p>  When the user clicks on the <code>X</code> button, the <code>DELETE</code> method is called.
+  <strong>Syntax:</strong></p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/delete.typescript" text="Syntax"/>
 <p>   It validates the <strong><code>id</code></strong> from the request parameters and subsequently uses <strong><code>surreal.delete</code></strong> to erase the corresponding record from SurrealDB.</p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/delete.ts" text="TS"/>
 <p>  The following query will be executed in your database when you click on the <code>X</code> button:</p>
-<Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/delete.surql" text="Surql"/>
-
+<pre><code class="lang-jsx">  <span class="hljs-keyword">DELETE</span> * <span class="hljs-keyword">FROM</span> sticky:gp4u59t5wlo0vre5d96j;
+</code></pre>
+</li>
+</ul>
 <p>Now that we are done with the major parts of the backend we will move towards the front end.</p>
-<p>As mentioned earlier you can find the complete code of Surreal Stickies <a href="https://github.com/surrealdb/examples/tree/main/notes-app">in the GitHub repository</a>. Please refer to it to successfully include all the components required to build the backend. </p>
+<p>As mentioned earlier you can find the complete code of Surreal Stickies <a href="https://github.com/surrealdb/examples/tree/main/notes-app">here</a>. Please refer to it to successfully include all the components required to build the backend. </p>
 <p>🎉 Congratulations on Building the CRUD API! 🎉</p>
-
-
 <p>Let’s proceed to Step 4: Building the Frontend!</p>
-
 <h2 id="step-4-building-the-user-interface">Step 4: Building the User Interface</h2>
-
-
-
-
-<ol> 
-	<p>Now that we are ready with our backend, let&#39;s build the frontend or user interface for our application.  </p>
-<li><p><h4>Set up the base layout for our application:</h4> The first thing we&#39;ll do is set up our base layout for our application using Next.js and Tailwind CSS. In the file <strong><code>src/app/layout.tsx</code></strong>, we establish the root layout of our application which includes a navbar, the main content of our page, and a footer.</p>
+<p>Now that we are ready with our backend, let&#39;s build the frontend or user interface for our application.  </p>
+<ol>
+<li><p><strong>Set up the base layout for our application:</strong> The first thing we&#39;ll do is set up our base layout for our application using Next.js and Tailwind CSS. In the file <strong><code>src/app/layout.tsx</code></strong>, we establish the root layout of our application which includes a navbar, the main content of our page, and a footer.</p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/layout.ts" text="TS"/>
 <p> This <strong><code>div</code></strong> element <code>&lt;div className=&quot;mx-auto flex w-full max-w-screen-xl flex-grow flex-col px-8 sm:px-24&quot;&gt;</code> is applying multiple CSS classes provided by Tailwind CSS to control the layout and styling of its content and make our application responsive &amp; mobile friendly. </p>
 </li>
-<li><p><h4>Creating API Calls:</h4> After setting up our layout, we need to create API calling functions that will interact with our backend. These functions are created in the <strong><code>src/lib/modifiers.ts</code></strong> file and include methods to fetch, create, update, and delete stickies.</p>
+</ol>
+<ol>
+<li><p><strong>Creating API Calls:</strong> After setting up our layout, we need to create API calling functions that will interact with our backend. These functions are created in the <strong><code>src/lib/modifiers.ts</code></strong> file and include methods to fetch, create, update, and delete stickies.</p>
 <p> Here&#39;s the code snippet for <strong><code>createSticky</code></strong> function:</p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/create-sticky.ts" text="TS"/>
 </li>
 
-<li><p><h4>Creating Hooks:</h4>  After defining our API calling functions, we need to create hooks that will use these functions and manage the state in our components. These hooks are created in the <strong><code>src/lib/hooks.ts</code></strong> file. Here&#39;s an example with the <strong><code>useCreateSticky</code></strong> hook:</p>
+<li><p><strong>Creating Hooks:</strong>  After defining our API calling functions, we need to create hooks that will use these functions and manage the state in our components. These hooks are created in the <strong><code>src/lib/hooks.ts</code></strong> file. Here&#39;s an example with the <strong><code>useCreateSticky</code></strong> hook:</p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/use-create-sticky.ts" text="TS"/>
 <p> These hooks use the <strong><code>useSWR</code></strong> and <strong><code>useSWRMutation</code></strong> hooks from the SWR library for data fetching and mutation. SWR provides a lot of useful features like caching, automatic revalidation, and error retries, which make it easier to manage the server state in a React application.</p>
 <p> In this application we give every SWR hook the same unique key. This will cause the list of stickies to automatically refresh once we use the create, update or delete hooks. </p>
 </li>
 
-<li><p><h4>Creating the Home Component:</h4> Now, we&#39;re ready to build our <strong><code>Home</code></strong> component which is the main page of our application. In this component, we use the hooks we’ve just defined previously to fetch, create, and render stickies. We also handle user interactions like creating a new sticky or displaying an error message.</p>
+<li><p><strong>Creating the Home Component:</strong> Now, we&#39;re ready to build our <strong><code>Home</code></strong> component which is the main page of our application. In this component, we use the hooks we’ve just defined previously to fetch, create, and render stickies. We also handle user interactions like creating a new sticky or displaying an error message.</p>
 <Code @name="docs/guides/build-a-notes-app-with-nextjs-tailwind-and-surrealdb/section-3/home.ts" text="TS"/>
 <p> Once you have all the components built, you can run the application on localhost. </p>
 <p> The following command will start your SurrealDB server and build your application concurrently. </p>
@@ -174,14 +176,14 @@ You can directly navigate to the <code><a href="https://github.com/surrealdb/exa
 <p> Optional Celebratory GIF 🎉</p>
 <h2 id="summary">Summary</h2>
 <p> In this tutorial, we took a deep dive into the building blocks of a real-world sticky note application built with SurrealDB, Next.js, and Tailwind CSS. We delved into two main parts of the application: Building the CRUD APIs in the backend and the User Interface in the front end.</p>
-<p> The backend was set up with the help of Surrealdb.js and Next.js. We went through the built-in functions provided by Surrealdb.js to query the database. All the functions we used here are explained in depth in our <a href="https://surrealdb.com/docs/integration/sdks/javascript"> JavaScript SDK documentation</a>. We built API routes using these functions to handle specific CRUD operations on the sticky notes in the SurrealDB database. </p>
+<p> The backend was set up with the help of Surrealdb.js and Next.js. We went through the built-in functions provided by Surrealdb.js to query the database. All the functions we used here are explained in depth in the <a href="https://surrealdb.com/docs/integration/sdks/javascript">documentation</a>. We built API routes using these functions to handle specific CRUD operations on the sticky notes in the SurrealDB database. </p>
 <p> On the front end, we used Next.js to create our app and its parts. We managed the app&#39;s state and its interactions with the APIs using hooks for different tasks, like retrieving the sticky notes, adding new ones, updating them, and deleting them.</p>
 <p> Finally, we used Tailwind CSS to design our app, making it easy and enjoyable for users to use. With all these parts working together, our app successfully lets users make, see, edit, and delete sticky notes.</p>
 <h2 id="conclusion">Conclusion</h2>
 <img src = "https://cdn.brandsafe.io/w(1600)q(90)sharpen(1,0.4,0.8)/cid91h4j8ems73a53480.auto
 " width="100%" alt="Surreal Stickies" />
 <p> The Notes App showed us a very simple and straightforward implementation of SurrealDB. SurrealDB is a powerful database capable of replacing the complete backend with inbuilt features like multi-tenancy, indexing, live queries, custom functions and many more. </p>
-<p> In this tutorial we only touched on a fraction of what makes SurrealD the ultimate multi-model database. To find out more see you can check out the <a href="https://surrealdb.com/features">SurrealDB features</a> or our <a href="https://github.com/surrealdb/surrealdb">GitHub repository</a>.</p>
+<p> In this tutorial we only touched on a fraction of what makes SurrealD the ultimate multi-model database. To find out more see you can check out the <a href="https://surrealdb.com/features">SurrealDB features</a> or our <a href="https://github.com/surrealdb/surrealdb">GitHub repo</a>.</p>
 </li>
 
 </ol>
