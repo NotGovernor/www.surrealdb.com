@@ -218,6 +218,7 @@ Router.map(function () {
 				this.route('type');
 				this.route('script');
 				this.route('sleep');
+				this.route('vector');
 			});
 		});
 
