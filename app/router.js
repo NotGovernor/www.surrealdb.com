@@ -192,6 +192,7 @@ Router.map(function () {
 					this.route('event');
 					this.route('function');
 					this.route('field');
+					this.route('analyzer');
 					this.route('indexes');
 					this.route('param');
 				});
@@ -212,6 +213,7 @@ Router.map(function () {
 				this.route('meta');
 				this.route('parse');
 				this.route('rand');
+				this.route('search');
 				this.route('session');
 				this.route('string');
 				this.route('time');
