@@ -11,7 +11,7 @@ SELECT gender, country, city FROM person GROUP BY gender, country, city;
 SELECT count() AS total, math::sum(age), gender, country FROM person GROUP BY gender, country;
 
 -- Get the total number of records in a table
-SELECT count() AS number_of_records FROM person GROUP ALL
+SELECT count() AS number_of_records FROM person GROUP ALL;
 
 -- Select unique values from a nested array across an entire table
 SELECT array::group(tags) AS tags FROM article GROUP ALL;
