@@ -25,39 +25,39 @@
 			<tbody>
 				<tr>
 					<td>
-						<code>-c</code> <span fg-faint>/</span> <code>--conn</code>
+						<code>-e</code> <span fg-faint>/</span> <code>--endpoint</code>
 						<l faint r>Optional</l>
 					</td>
 					<td>
 						Sets the url of the database server to connect to
 						<br>
-						<p small>Default is <code>https://cloud.surrealdb.com</code></p>
+						<p small>Default is <code>ws://localhost:8000</code></p>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<code>-u</code> <span fg-faint>/</span> <code>--user</code>
+						<code>-u</code> <span fg-faint>/</span> <code>--username</code>
 						<l yellow r>Required</l>
 					</td>
 					<td>Sets the root, namespace, or database user</td>
 				</tr>
 				<tr>
 					<td>
-						<code>-p</code> <span fg-faint>/</span> <code>--pass</code>
+						<code>-p</code> <span fg-faint>/</span> <code>--password</code>
 						<l yellow r>Required</l>
 					</td>
 					<td>Sets the password for the specified user</td>
 				</tr>
 				<tr>
 					<td>
-						<code>--ns</code>
+						<code>--namespace</code>
 						<l faint r>Optional</l>
 					</td>
 					<td>Sets the desired namespace into which to import data</td>
 				</tr>
 				<tr>
 					<td>
-						<code>--db</code>
+						<code>--database</code>
 						<l faint r>Optional</l>
 					</td>
 					<td>Sets the desired database into which to import data</td>
@@ -68,6 +68,27 @@
 						<l faint r>Optional</l>
 					</td>
 					<td>Sets whether database responses should be pretty printed</td>
+				</tr>
+				<tr>
+					<td>
+						<code>--json</code>
+						<l faint r>Optional</l>
+					</td>
+					<td>Sets whether to emit results in JSON</td>
+				</tr>
+				<tr>
+					<td>
+						<code>--multi</code>
+						<l faint r>Optional</l>
+					</td>
+					<td>Sets whether omitting semicolon causes a newline</td>
+				</tr>
+				<tr>
+					<td>
+						<code>-h</code> <span fg-faint>/</span> <code>--help</code>
+						<l faint r>Optional</l>
+					</td>
+					<td>Prints help</td>
 				</tr>
 			</tbody>
 		</table>
@@ -82,14 +103,14 @@
 	<p>Once you see the <code>&gt;</code> character you can type your SurrealQL query, followed by the <code>enter</code> key. The command has support for <code>&uarr;</code> and <code>&darr;</code> arrows for selecting previous SQL statements, and stores the statement history in a <code>history.txt</code> file. To exit the REPL use the <code>ctrl + c</code> or <code>ctrl + d</code> key combinations.</p>
 	<codes vertical>
 		<Code @name="docs-cli-SQL-main.shell" text="Command line">
-			user@localhost % surreal sql --conn http://localhost:8000 --user root --pass root --ns test --db test
+			user@localhost % surreal sql --endpoint http://localhost:8000 --username root --password root --namespace test --database test
 		</Code>
 		<Code @name="docs/cli/sql/main.txt" />
 	</codes>
 	<p>It is also possible to pipe a set of statements to a remote database. This functionality is only designed for submitting a small number of queries to the database server. For a large number of queries, use the <Link @link="docs.cli.import">import command</Link>.</p>
 	<codes vertical>
 		<Code @name="docs-cli-sql-pipe.shell" text="Command line">
-			user@localhost % cat myfile.surql | surreal sql --conn http://localhost:8000 --user root --pass root --ns test --db test
+			user@localhost % cat myfile.surql | surreal sql --endpoint http://localhost:8000 --username root --password root --namespace test --database test
 		</Code>
 	</codes>
 </Layout::Text>

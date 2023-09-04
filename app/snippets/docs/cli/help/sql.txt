@@ -1,14 +1,17 @@
 Start an SQL REPL in your terminal with pipe support
 
-USAGE:
-    surreal sql [OPTIONS] --ns <ns> --db <db>
+Usage: surreal sql [OPTIONS]
 
-OPTIONS:
-    -c, --conn <conn>    Remote database server url to connect to [default:
-                         https://cloud.surrealdb.com]
-        --db <db>        The database to export the data from
-    -h, --help           Print help information
-        --ns <ns>        The namespace to export the data from
-    -p, --pass <pass>    Database authentication password to use when connecting [default: root]
-        --pretty         Whether database responses should be pretty printed
-    -u, --user <user>    Database authentication username to use when connecting [default: root]
+Options:
+  -e, --endpoint <ENDPOINT>    Remote database server url to connect to [default: ws://localhost:8000] [aliases: conn]
+  -u, --username <USERNAME>    Database authentication username to use when connecting [env: SURREAL_USER=] [aliases:
+                               user]
+  -p, --password <PASSWORD>    Database authentication password to use when connecting [env: SURREAL_PASS=] [aliases:
+                               pass]
+      --namespace <NAMESPACE>  The namespace selected for the operation [env: SURREAL_NAMESPACE=] [aliases: ns]
+      --database <DATABASE>    The database selected for the operation [env: SURREAL_DATABASE=] [aliases: db]
+      --pretty                 Whether database responses should be pretty printed
+      --json                   Whether to emit results in JSON
+      --multi                  Whether omitting semicolon causes a newline
+  -h, --help                   Print help
+  
